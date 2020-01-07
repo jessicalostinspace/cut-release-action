@@ -7,7 +7,7 @@ try {
   const branchName = branchPrefix + semanticVersion;
   const regexp = /^[A-Za-z0-9_-]*$/;
   if (regexp.test(branchName)) {
-    const commands = 'git checkout -b "$(branchName)" &&\ git push --set-upstream origin "$(branchName)" &&\ echo "Created " $(branchName)'  
+    const commands = 'set -e &&\ git checkout -b "$(branchName)" &&\ git push --set-upstream origin "$(branchName)" &&\ echo "Created " $(branchName)';
     console.log("commands", commands)
     const output = cutReleaseBranch(branchName);
     console.log('output', output);
