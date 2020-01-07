@@ -37,7 +37,7 @@ function cutReleaseBranch(commands) {
   
       return;
     }
-    // console.log("stdout :", stdout)
+    console.log("stdout :", stdout)
     // const data = JSON.parse(stdout);
     // if (data) {
     //   return data;
