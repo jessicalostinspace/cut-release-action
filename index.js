@@ -3,8 +3,9 @@ const { exec } = require('child_process');
 
 try {
   const branchPrefix = core.getInput('branch-prefix');
-  const semanticVersion = core.getInput('semantic-version');
-  const branchName = branchPrefix + semanticVersion;
+  const bumpedSemanticVersion = core.getInput('bumped-semantic-version');
+  const branchName = branchPrefix + bumpedSemanticVersion;
+  console.log("branchName : ", branchName)
   const regexp = /^[A-Za-z0-9_-]*$/;
   if (regexp.test(branchName)) {
     const commands = 'set -e &&\ git checkout -b "$branchName" &&\ git push --set-upstream origin "$branchName" &&\ echo ""Created " $branchName"';
@@ -36,7 +37,7 @@ function cutReleaseBranch(commands) {
   
       return;
     }
-    console.log("stdout :", stdout)
+    // console.log("stdout :", stdout)
     // const data = JSON.parse(stdout);
     // if (data) {
     //   return data;
