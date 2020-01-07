@@ -7,9 +7,10 @@ try {
   const branchName = branchPrefix + semanticVersion;
   const regexp = /^[A-Za-z0-9_-]*$/;
   if (regexp.test(branchName)) {
-    const commands = 'git checkout -b "${branchName}" &&\ git push --set-upstream origin "${branchName}" &&\ echo "Created " ${branchName}'  
+    const commands = 'git checkout -b "$(branchName)" &&\ git push --set-upstream origin "$(branchName)" &&\ echo "Created " $(branchName)'  
     console.log("commands", commands)
-    // const output = cutReleaseBranch(branchName);
+    const output = cutReleaseBranch(branchName);
+    console.log('output', output);
     // output.then(function(result){
     //   if (result["semanticVersion"]) {
     //     console.log('\x1b[32m%s\x1b[0m', `Last Semantic Version Found: ${result["semanticVersion"]}`);
@@ -25,24 +26,24 @@ try {
   core.setFailed(error.message);
 }
 
-// function cutReleaseBranch(command) {
-//   try{
-//     const { err, stdout, stderr } = exec(command, [{ shell: "bash" }]);
+function cutReleaseBranch(commands) {
+  try{
+    const { err, stdout, stderr } = exec(commands, [{ shell: "bash" }]);
 
-//     if (err) {
-//       console.log('\x1b[33m%s\x1b[0m', 'Could not find any branches because: ');
-//       console.log('\x1b[31m%s\x1b[0m', stderr);
-//       process.exit(1);
+    if (err) {
+      console.log('\x1b[33m%s\x1b[0m', 'Could not create new release branch because: ');
+      console.log('\x1b[31m%s\x1b[0m', stderr);
+      process.exit(1);
   
-//       return;
-//     }
+      return;
+    }
   
-//     const data = JSON.parse(stdout);
-//     if (data) {
-//       return data;
-//     }
-//   } catch (err) {
-//     console.log(err);
-//     process.exit(0);
-//   }
-// }
+    const data = JSON.parse(stdout);
+    if (data) {
+      return data;
+    }
+  } catch (err) {
+    console.log(err);
+    process.exit(0);
+  }
+}
