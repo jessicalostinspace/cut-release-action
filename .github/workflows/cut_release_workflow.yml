@@ -31,4 +31,5 @@ jobs:
       id: crb
       uses: ./
       with:
-        bumped-semantic-version: ${{ steps.bsv.outputs.last-semver }}
+        branch-prefix: 'release-v'
+        semantic-version: ${{ steps.bsv.outputs.last-semver }}

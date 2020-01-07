@@ -3,8 +3,8 @@ const { exec } = require('child_process');
 
 try {
   const branchPrefix = core.getInput('branch-prefix');
-  const bumpedSemanticVersion = core.getInput('bumped-semantic-version');
-  const branchName = branchPrefix + bumpedSemanticVersion;
+  const semanticVersion = core.getInput('semantic-version');
+  const branchName = branchPrefix + semanticVersion;
   console.log("branchName : ", branchName)
   const regexp = /^[A-Za-z0-9_-]*$/;
   if (regexp.test(branchName)) {
