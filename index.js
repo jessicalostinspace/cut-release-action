@@ -8,8 +8,7 @@ try {
   const regexp = /^[A-Za-z0-9_-]*$/;
   if (regexp.test(branchName)) {
     const commands = 'set -e &&\ git checkout -b "$branchName" &&\ git push --set-upstream origin "$branchName" &&\ echo "Created " $branchName';
-    console.log("commands", commands)
-    const output = cutReleaseBranch(branchName);
+    const output = cutReleaseBranch(commands);
     console.log('output', output);
     // output.then(function(result){
     //   if (result["semanticVersion"]) {
