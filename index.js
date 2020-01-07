@@ -6,7 +6,7 @@ try {
   const semanticVersion = core.getInput('semantic-version');
   const branchName = branchPrefix + semanticVersion;
   console.log("branchName : ", branchName)
-  const regexp = /^[A-Za-z0-9_-]*$/;
+  const regexp = /^[\.A-Za-z0-9_-]*$/;
   if (regexp.test(branchName)) {
     const commands = 'set -e &&\ git checkout -b "$branchName" &&\ git push --set-upstream origin "$branchName" &&\ echo ""Created " $branchName"';
     const output = cutReleaseBranch(commands);
