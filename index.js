@@ -36,11 +36,11 @@ function cutReleaseBranch(commands) {
   
       return;
     }
-  
-    const data = JSON.parse(stdout);
-    if (data) {
-      return data;
-    }
+    console.log("stdout :", stdout)
+    // const data = JSON.parse(stdout);
+    // if (data) {
+    //   return data;
+    // }
   } catch (err) {
     console.log(err);
     process.exit(0);
