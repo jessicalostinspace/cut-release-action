@@ -1,0 +1,19 @@
+name: 'Cut A Release Branch Given a Semantic Version and Branch Prefix'
+author: "Jessica Wilson"
+description: 'Cuts a new release branch with the a branch name of <prefix><semantic-version>.'
+inputs:
+  branch-prefix:
+    description: 'The prefix to be prepended by the semantic version'
+    required: true
+  semantic-version:
+    description: 'The desired semantic version you want to cut a release branch for'
+    required: true
+outputs:
+  release-branch-name:
+    description: 'The name of the new release branch'
+runs:
+  using: 'node12'
+  main: 'index.js'
+branding:
+  icon: 'git-branch'
+  color: 'green'
