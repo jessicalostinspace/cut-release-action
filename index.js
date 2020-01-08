@@ -15,7 +15,7 @@ try {
 
   const regexp = /^[\.A-Za-z0-9_-]*$/;
   if (regexp.test(branchName)) {
-    const output = cutReleaseBranch(branchName);
+    const output = cutReleaseBranch(branchName, repositoryUrl);
     output.then(function(result){
         console.log("result: ", result)
     //   if (result["semanticVersion"]) {
@@ -32,13 +32,11 @@ try {
   core.setFailed(error.message);
 }
 
-async function cutReleaseBranch(branchName, githubActor, githubRepository, githubToken) {
+async function cutReleaseBranch(branchName, repositoryUrl) {
   try{
-    // const { err, stdout, stderr } = exec(commands, [{ shell: "bash" }]);
-    const execOutput = await exec.exec(`${src}/cut-release.sh ${branchName}`);
+    const execOutput = await exec.exec(`${src}/cut-release.sh ${branchName} ${repositoryUrl}`);
     core.debug("execOutput:", execOutput.then((result) => console.log("result", result)))
-    // core.debug("err:", err)
-    // core.debug("stderr:", stderr)
+
     if (err) {
       console.log('\x1b[33m%s\x1b[0m', 'Could not create new release branch because: ');
       console.log('\x1b[31m%s\x1b[0m', stderr);
