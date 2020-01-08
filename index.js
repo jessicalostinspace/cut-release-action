@@ -1,6 +1,5 @@
 const core = require('@actions/core');
-// const { exec } = require('child_process');
-const exec = require("@actions/exec");
+const exec = require('@actions/exec');
 
 const src = __dirname;
 console.log("src: ", src)
@@ -11,24 +10,19 @@ try {
   const semanticVersion = core.getInput('semantic-version');
   const branchName = branchPrefix + semanticVersion;
 
-  const githubActor = core.getInput('github-actor');
-  const githubRepository = core.getInput('github-repository');
-  const githubToken = core.getInput('github-token');
-
-  console.log('githubActor', githubActor);
-  console.log('githubRepository', githubRepository);
-  console.log('githubToken', githubToken);
+  const repositoryUrl = core.getInput('repo-url2');
+  console.log('repository-url', repositoryUrl);
 
   const regexp = /^[\.A-Za-z0-9_-]*$/;
   if (regexp.test(branchName)) {
     const output = cutReleaseBranch(branchName);
-    console.log('output', output);
-    // output.then(function(result){
+    output.then(function(result){
+        console.log("result: ", result)
     //   if (result["semanticVersion"]) {
     //     console.log('\x1b[32m%s\x1b[0m', `Last Semantic Version Found: ${result["semanticVersion"]}`);
-    //     core.setOutput("last-semver", result["semanticVersion"]);
+        // core.setOutput("last-semver", result["semanticVersion"]);
     //   }
-    // });
+    });
   } else {
     const regexError = "Branch prefix and semantic version must contain only numbers, strings, underscores, periods, and dashes.";
     console.log('\x1b[33m%s\x1b[0m', regexError);
@@ -41,7 +35,7 @@ try {
 async function cutReleaseBranch(branchName, githubActor, githubRepository, githubToken) {
   try{
     // const { err, stdout, stderr } = exec(commands, [{ shell: "bash" }]);
-    const execOutput = await exec.exec(`${src}/cut-release.sh ${branchName} ${githubActor} ${githubRepository} ${githubToken}`);
+    const execOutput = await exec.exec(`${src}/cut-release.sh ${branchName}`);
     core.debug("execOutput:", execOutput.then((result) => console.log("result", result)))
     // core.debug("err:", err)
     // core.debug("stderr:", stderr)
