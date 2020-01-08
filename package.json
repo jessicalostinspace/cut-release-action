@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "Cuts a new release branch given a prefix and version\"",
   "main": "index.js",
-  "dependencies": {},
+  "dependencies": {
+    "@actions/exec": "^1.0.2"
+  },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
