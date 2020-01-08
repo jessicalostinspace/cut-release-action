@@ -32,9 +32,6 @@ jobs:
       uses: ./
       with:
         repo-url: 'https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY.git'
-        repo-url2: 'https://${GITHUB_ACTOR}:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git'
-        github-actor: ${{ env.GITHUB_ACTOR }}
-        github-repository: ${{ env.GITHUB_REPOSITORY }}
-        github-token: ${{ secrets.GITHUB_TOKEN }}
+        repo-url2: 'https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git'
         branch-prefix: 'release-v'
         semantic-version: ${{ steps.bsv.outputs.bumped-semantic-version }}
