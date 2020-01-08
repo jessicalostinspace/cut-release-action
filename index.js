@@ -33,7 +33,7 @@ async function cutReleaseBranch(branchName) {
   try{
     // const { err, stdout, stderr } = exec(commands, [{ shell: "bash" }]);
     const execOutput = await exec.exec(`${src}/cut-release.sh ${branchName}`)
-    core.debug("execOutput:", execOutput)
+    core.debug("execOutput:", execOutput.then((result) => console.log(result)))
     // core.debug("err:", err)
     // core.debug("stderr:", stderr)
     if (err) {
