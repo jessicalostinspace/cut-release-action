@@ -11,7 +11,7 @@ try {
   const src = __dirname + "/src";
   core.debug(`src: ${src}`);
   if (regexp.test(branchName)) {
-    const output = cutReleaseBranch(commands);
+    const output = cutReleaseBranch(branchName);
     console.log('output', output);
     // output.then(function(result){
     //   if (result["semanticVersion"]) {
@@ -28,13 +28,13 @@ try {
   core.setFailed(error.message);
 }
 
-async function cutReleaseBranch(commands) {
+async function cutReleaseBranch(branchName) {
   try{
     // const { err, stdout, stderr } = exec(commands, [{ shell: "bash" }]);
-    await exec.exec(`${src}/cut-release.sh`)
-    core.debug("stdout:", stdout)
-    core.debug("err:", err)
-    core.debug("stderr:", stderr)
+    const execOutput = await exec.exec(`${src}/cut-release.sh ${branchName}`)
+    core.debug("execOutput:", execOutput)
+    // core.debug("err:", err)
+    // core.debug("stderr:", stderr)
     if (err) {
       console.log('\x1b[33m%s\x1b[0m', 'Could not create new release branch because: ');
       console.log('\x1b[31m%s\x1b[0m', stderr);
