@@ -1,5 +1,6 @@
 const core = require('@actions/core');
 const { exec } = require('child_process');
+const exec = require("@actions/exec");
 
 try {
   const branchPrefix = core.getInput('branch-prefix');
@@ -7,8 +8,9 @@ try {
   const branchName = branchPrefix + semanticVersion;
   console.log("branchName : ", branchName)
   const regexp = /^[\.A-Za-z0-9_-]*$/;
+  const src = __dirname + "/src";
+  core.debug(`src: ${src}`);
   if (regexp.test(branchName)) {
-    const commands = 'set -eou pipefail &&\ git checkout -b "$branchName" &&\ git push --set-upstream origin "$branchName" &&\ echo ""Created " $branchName"';
     const output = cutReleaseBranch(commands);
     console.log('output', output);
     // output.then(function(result){
@@ -26,9 +28,10 @@ try {
   core.setFailed(error.message);
 }
 
-function cutReleaseBranch(commands) {
+async function cutReleaseBranch(commands) {
   try{
-    const { err, stdout, stderr } = exec(commands, [{ shell: "bash" }]);
+    // const { err, stdout, stderr } = exec(commands, [{ shell: "bash" }]);
+    await exec.exec(`${src}/cut-release.sh`)
     core.debug("stdout:", stdout)
     core.debug("err:", err)
     core.debug("stderr:", stderr)
