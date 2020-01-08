@@ -12,6 +12,10 @@ jobs:
   cut_latest_release_branch:
     name: Cut the latest release
     runs-on: ubuntu-latest
+    env:
+      GITHUB_ACTOR: ${{ env.GITHUB_ACTOR }}
+      GITHUB_REPOSITORY: ${{ env.GITHUB_REPOSITORY }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
     - name: Checkout Development
@@ -31,5 +35,8 @@ jobs:
       id: crb
       uses: ./
       with:
+        github-actor: $${{ env.GITHUB_ACTOR }}
+        github-repository: ${{ env.GITHUB_REPOSITORY }}
+        github-token: ${{ env.GITHUB_TOKEN }}
         branch-prefix: 'release-v'
         semantic-version: ${{ steps.bsv.outputs.bumped-semantic-version }}

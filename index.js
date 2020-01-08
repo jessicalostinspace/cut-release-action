@@ -3,13 +3,22 @@ const core = require('@actions/core');
 const exec = require("@actions/exec");
 
 const src = __dirname;
+console.log("src: ", src)
 core.debug(`src: ${src}`);
 
 try {
   const branchPrefix = core.getInput('branch-prefix');
   const semanticVersion = core.getInput('semantic-version');
   const branchName = branchPrefix + semanticVersion;
-  console.log("branchName : ", branchName)
+
+  const githubActor = core.getInput('github-actor');
+  const githubRepository = core.getInput('github-repository');
+  const githubToken = core.getInput('github-token');
+
+  console.log('githubActor', githubActor);
+  console.log('githubRepository', githubRepository);
+  console.log('githubToken', githubToken);
+
   const regexp = /^[\.A-Za-z0-9_-]*$/;
   if (regexp.test(branchName)) {
     const output = cutReleaseBranch(branchName);
@@ -21,7 +30,7 @@ try {
     //   }
     // });
   } else {
-    const regexError = "Branch prefix and semantic version must contain only numbers, strings, underscores, and dashes.";
+    const regexError = "Branch prefix and semantic version must contain only numbers, strings, underscores, periods, and dashes.";
     console.log('\x1b[33m%s\x1b[0m', regexError);
     core.setFailed(regexError);
   }
@@ -29,11 +38,11 @@ try {
   core.setFailed(error.message);
 }
 
-async function cutReleaseBranch(branchName) {
+async function cutReleaseBranch(branchName, githubActor, githubRepository, githubToken) {
   try{
     // const { err, stdout, stderr } = exec(commands, [{ shell: "bash" }]);
-    const execOutput = await exec.exec(`${src}/cut-release.sh ${branchName}`)
-    core.debug("execOutput:", execOutput.then((result) => console.log(result)))
+    const execOutput = await exec.exec(`${src}/cut-release.sh ${branchName} ${githubActor} ${githubRepository} ${githubToken}`);
+    core.debug("execOutput:", execOutput.then((result) => console.log("result", result)))
     // core.debug("err:", err)
     // core.debug("stderr:", stderr)
     if (err) {
