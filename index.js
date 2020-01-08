@@ -2,14 +2,15 @@ const core = require('@actions/core');
 // const { exec } = require('child_process');
 const exec = require("@actions/exec");
 
+const src = __dirname;
+core.debug(`src: ${src}`);
+
 try {
   const branchPrefix = core.getInput('branch-prefix');
   const semanticVersion = core.getInput('semantic-version');
   const branchName = branchPrefix + semanticVersion;
   console.log("branchName : ", branchName)
   const regexp = /^[\.A-Za-z0-9_-]*$/;
-  const src = __dirname + "/src";
-  core.debug(`src: ${src}`);
   if (regexp.test(branchName)) {
     const output = cutReleaseBranch(branchName);
     console.log('output', output);
