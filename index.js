@@ -29,7 +29,9 @@ try {
 function cutReleaseBranch(commands) {
   try{
     const { err, stdout, stderr } = exec(commands, [{ shell: "bash" }]);
-
+    core.debug("stdout:", stdout)
+    core.debug("err:", err)
+    core.debug("stderr:", stderr)
     if (err) {
       console.log('\x1b[33m%s\x1b[0m', 'Could not create new release branch because: ');
       console.log('\x1b[31m%s\x1b[0m', stderr);
