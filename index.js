@@ -22,10 +22,10 @@ try {
 }
 
 async function cutReleaseBranch(branchName, repositoryUrl) {
-  try{
+  try {
     let output = '';
     let err = '';
-    
+
     const options = {};
     options.listeners = {
       stdout: (data) => {
@@ -38,21 +38,20 @@ async function cutReleaseBranch(branchName, repositoryUrl) {
     options.cwd = './';
 
     await exec.exec(`${src}/cut-release.sh`, [branchName, repositoryUrl], options);
-    if (output && !err) {
-        console.log('\x1b[32m%s\x1b[0m', `Github Output: ${semanticVersion}`);
-        core.setOutput("release-branch-name", branchName);
-      }
+    console.log("output: ", output)
+    if (output) {
+      console.log('\x1b[32m%s\x1b[0m', `Github Output: ${semanticVersion}`);
+      core.setOutput("release-branch-name", branchName);
+    }
 
     if (err) {
-      console.log('\x1b[33m%s\x1b[0m', 'Could not create new release branch because: ');
-      console.log('\x1b[31m%s\x1b[0m', err);
-      core.setFailed(err);
+      core.setFailed(`Could not cut release branch because: ${err}`);
       process.exit(1);
-  
+
       return;
     }
   } catch (err) {
-    core.setFailed(err);
+    core.setFailed(err.message);
     process.exit(0);
   }
 }
