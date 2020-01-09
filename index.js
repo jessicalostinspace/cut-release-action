@@ -44,11 +44,9 @@ async function cutReleaseBranch(branchName, repositoryUrl) {
       core.setOutput("release-branch-name", branchName);
     }
 
-    if (!isEmpty(err)) {
+    if (err.isEmpty()) {
       core.setFailed(`Could not cut release branch because: ${err}`);
       process.exit(1);
-
-      return;
     }
   } catch (err) {
     core.setFailed(err.message);
