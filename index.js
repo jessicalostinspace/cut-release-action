@@ -14,7 +14,6 @@ try {
     cutReleaseBranch(branchName, repositoryUrl);
   } else {
     const regexError = "Branch prefix and semantic version must contain only numbers, strings, underscores, periods, and dashes.";
-    console.log('\x1b[33m%s\x1b[0m', regexError);
     core.setFailed(regexError);
   }
 } catch (error) {
@@ -38,7 +37,7 @@ async function cutReleaseBranch(branchName, repositoryUrl) {
     options.cwd = './';
 
     await exec.exec(`${src}/cut-release.sh`, [branchName, repositoryUrl], options);
-    console.log("output: ", output)
+
     if (output) {
       console.log('\x1b[32m%s\x1b[0m', `Github Output: ${output}`);
       core.setOutput("release-branch-name", branchName);
