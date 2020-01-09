@@ -35,7 +35,10 @@ try {
 async function cutReleaseBranch(branchName, repositoryUrl) {
   try{
     const execOutput = await exec.exec(`${src}/cut-release.sh ${branchName} ${repositoryUrl}`);
-    core.debug("execOutput:", execOutput.then((result) => console.log("result", result)))
+    execOutput.then(function(result){
+        console.log("exec Output result: ", result)
+    });
+    // core.debug("execOutput:", execOutput.then((result) => console.log("result", result)))
 
     if (err) {
       console.log('\x1b[33m%s\x1b[0m', 'Could not create new release branch because: ');
