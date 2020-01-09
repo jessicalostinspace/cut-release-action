@@ -26,7 +26,7 @@ jobs:
       uses: jessicalostinspace/bump-semantic-version-action@v1.0.1
       with:
         semantic-version: ${{ steps.lrb.outputs.last-semver }}
-        version-type: 'MAJOR'
+        version-type: 'MINOR'
     - name: Cut Release Branch
       id: crb
       uses: ./
