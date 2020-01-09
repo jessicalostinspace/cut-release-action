@@ -15,7 +15,7 @@ jobs:
 
     steps:
     - name: Checkout Development
-      uses: actions/checkout@v2 #checks-out your repository under $GITHUB_WORKSPACE, so your workflow can access it.
+      uses: actions/checkout@v1 #checks-out your repository under $GITHUB_WORKSPACE, so your workflow can access it.
     - name: Get Last Branch and Semantic Version Containing String
       id: lrb
       uses: jessicalostinspace/github-action-get-regex-branch@v1.0.6
