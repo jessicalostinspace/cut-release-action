@@ -3,9 +3,8 @@ author: "Jessica Wilson"
 description: 'Cuts a new release branch with the a branch name of <prefix><semantic-version>.'
 inputs:
   repository-url:
-    description: 'The name of the repository'
+    description: 'The name of the repository: "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"'
     required: true
-    default: 'https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git'
   branch-prefix:
     description: 'The prefix to be prepended by the semantic version'
     required: true
