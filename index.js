@@ -40,7 +40,7 @@ async function cutReleaseBranch(branchName, repositoryUrl) {
     await exec.exec(`${src}/cut-release.sh`, [branchName, repositoryUrl], options);
     console.log("output: ", output)
     if (output) {
-      console.log('\x1b[32m%s\x1b[0m', `Github Output: ${semanticVersion}`);
+      console.log('\x1b[32m%s\x1b[0m', `Github Output: ${output}`);
       core.setOutput("release-branch-name", branchName);
     }
 
