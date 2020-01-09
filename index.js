@@ -2,8 +2,6 @@ const core = require('@actions/core');
 const exec = require('@actions/exec');
 
 const src = __dirname;
-console.log("src: ", src)
-core.debug(`src: ${src}`);
 
 try {
   const branchPrefix = core.getInput('branch-prefix');
@@ -40,20 +38,21 @@ async function cutReleaseBranch(branchName, repositoryUrl) {
     options.cwd = './';
 
     await exec.exec(`${src}/cut-release.sh`, [branchName, repositoryUrl], options);
-    console.log("OUTPUT: ", output)
-    console.log("PARSEDOUTPUT: ", JSON.parse(output))
-    // const { semanticVersion, branchName } = JSON.parse(output);
+    if (output && !err) {
+        console.log('\x1b[32m%s\x1b[0m', `Github Output: ${semanticVersion}`);
+        core.setOutput("release-branch-name", branchName);
+      }
 
     if (err) {
       console.log('\x1b[33m%s\x1b[0m', 'Could not create new release branch because: ');
-      console.log('\x1b[31m%s\x1b[0m', stderr);
+      console.log('\x1b[31m%s\x1b[0m', err);
       core.setFailed(err);
       process.exit(1);
   
       return;
     }
   } catch (err) {
-    console.log(err);
+    core.setFailed(err);
     process.exit(0);
   }
 }
