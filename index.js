@@ -44,7 +44,7 @@ async function cutReleaseBranch(branchName, repositoryUrl) {
   
       return;
     }
-    console.log("stdout :", stdout)
+
     // const data = JSON.parse(stdout);
     // if (data) {
     //   return data;
