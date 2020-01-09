@@ -24,7 +24,7 @@ try {
 async function cutReleaseBranch(branchName, repositoryUrl) {
   try {
     let output = '';
-    let err = '';
+    let err;
 
     const options = {};
     options.listeners = {
