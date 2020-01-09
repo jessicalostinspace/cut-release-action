@@ -42,14 +42,12 @@ async function cutReleaseBranch(branchName, repositoryUrl) {
     if (output) {
       console.log('\x1b[32m%s\x1b[0m', `Github Output: ${output}`);
       core.setOutput("release-branch-name", branchName);
-    }
-
-    if (err !== '') {
-      core.setFailed(`Could not cut release branch because: ${err}`);
+    } else {
+      core.setFailed(err);
       process.exit(1);
     }
   } catch (err) {
-    core.setFailed(err.message);
+    core.setFailed(`Could not cut release branch because: ${err.message}`);
     process.exit(0);
   }
 }
