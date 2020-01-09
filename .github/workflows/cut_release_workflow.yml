@@ -18,7 +18,7 @@ jobs:
       uses: actions/checkout@v1 #checks-out your repository under $GITHUB_WORKSPACE, so your workflow can access it.
     - name: Get Last Branch and Semantic Version Containing String
       id: lrb
-      uses: jessicalostinspace/github-action-get-regex-branch@v1.0.7
+      uses: jessicalostinspace/github-action-get-regex-branch@v1.0.8
       with:
         regex-string: 'release-v'
     - name: Bump Semantic Version
