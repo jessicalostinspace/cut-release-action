@@ -1,0 +1,31 @@
+{
+  "name": "cut-release-action",
+  "version": "1.0.0",
+  "description": "Cuts a new release branch given a prefix and version\"",
+  "main": "index.js",
+  "dependencies": {
+    "@actions/core": "^1.2.0",
+    "@actions/exec": "^1.0.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jessicalostinspace/cut-release-action.git"
+  },
+  "keywords": [
+    "cut",
+    "new",
+    "release",
+    "release",
+    "versioning"
+  ],
+  "author": "Jessica Wilson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jessicalostinspace/cut-release-action/issues"
+  },
+  "homepage": "https://github.com/jessicalostinspace/cut-release-action#readme"
+}

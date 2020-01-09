@@ -1,0 +1,36 @@
+name: Cut Scheduled Release
+
+# on: 
+#   schedule:
+#     - cron: '0 5 * * 5' # Run the job at 5PM every Friday
+on:
+  push:
+    branches:
+      - 'development'
+
+jobs:
+  cut_latest_release_branch:
+    name: Cut the latest release
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Development
+      uses: actions/checkout@v2 #checks-out your repository under $GITHUB_WORKSPACE, so your workflow can access it.
+    - name: Get Last Branch and Semantic Version Containing String
+      id: lrb
+      uses: jessicalostinspace/github-action-get-regex-branch@v1.0.6
+      with:
+        regex-string: 'release-v'
+    - name: Bump Semantic Version
+      id: bsv
+      uses: jessicalostinspace/bump-semantic-version-action@v1.0.1
+      with:
+        semantic-version: ${{ steps.lrb.outputs.last-semver }}
+        version-type: 'MINOR'
+    - name: Cut Release Branch
+      id: crb
+      uses: ./
+      with:
+        repository-url: 'https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git'
+        branch-prefix: 'release-v'
+        semantic-version: ${{ steps.bsv.outputs.bumped-semantic-version }}
