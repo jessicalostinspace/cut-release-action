@@ -2,18 +2,10 @@ name: 'Cut A Release Branch Given a Semantic Version and Branch Prefix'
 author: "Jessica Wilson"
 description: 'Cuts a new release branch with the a branch name of <prefix><semantic-version>.'
 inputs:
-  # github-actor:
-  #   description: 'The name of the person or app that initiated the workflow'
-  #   required: true
-  # github-repository:
-  #   description: 'The owner and repository name'
-  #   required: true
-  # github-token:
-  #   description: 'The GitHub authentication token'
-  #   required: true
   repository-url:
     description: 'The name of the repository'
     required: true
+    default: 'https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git'
   branch-prefix:
     description: 'The prefix to be prepended by the semantic version'
     required: true

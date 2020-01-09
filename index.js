@@ -10,7 +10,7 @@ try {
   const semanticVersion = core.getInput('semantic-version');
   const branchName = branchPrefix + semanticVersion;
 
-  const repositoryUrl = core.getInput('repo-url2');
+  const repositoryUrl = core.getInput('repository-url');
   console.log('repository-url', repositoryUrl);
 
   const regexp = /^[\.A-Za-z0-9_-]*$/;

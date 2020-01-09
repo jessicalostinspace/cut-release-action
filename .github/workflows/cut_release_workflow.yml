@@ -31,7 +31,6 @@ jobs:
       id: crb
       uses: ./
       with:
-        repo-url: 'https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY.git'
-        repo-url2: 'https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git'
+        repository-url: 'https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git'
         branch-prefix: 'release-v'
         semantic-version: ${{ steps.bsv.outputs.bumped-semantic-version }}
