@@ -1,6 +1,6 @@
 name: 'Cut A Release Branch Given a Semantic Version and Branch Prefix'
 author: "Jessica Wilson"
-description: 'Cuts a new release branch with the a branch name of <prefix><semantic-version>.'
+description: 'Cuts a new release branch with a branch name of <prefix><semantic-version>.'
 inputs:
   repository-url:
     description: 'The name of the repository'
