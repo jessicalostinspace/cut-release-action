@@ -1,7 +1,7 @@
 
 # Cut Release Branch
 
-This action cuts a new release branch with a branch name of <prefix><semantic-version>.
+This action cuts a new release branch with a branch name of `<prefix><semantic-version>`.
 
 ## Inputs
 
