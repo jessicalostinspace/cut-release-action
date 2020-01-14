@@ -8,7 +8,7 @@ This action cuts a new release branch with a branch name of `<prefix><semantic-v
 ### `repository-url`
 
 **Required** The repository url you are running the action in. 
-    'https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git'
+    `'https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git'`
 
 ### `branch-prefix`
 
