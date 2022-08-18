@@ -4,7 +4,7 @@
   "description": "Cuts a new release branch given a prefix and version\"",
   "main": "index.js",
   "dependencies": {
-    "@actions/core": "^1.2.0",
+    "@actions/core": "^1.9.1",
     "@actions/exec": "^1.0.2"
   },
   "devDependencies": {},
